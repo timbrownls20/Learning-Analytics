@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadStudents } from "../actions/index";
+import { Student } from "./Student";
 
-export class Students extends Component {
+export class StudentList extends Component {
   constructor(props) {
     super(props);
   }
@@ -14,8 +15,8 @@ export class Students extends Component {
   render() {
     return (
       <ul>
-        {this.props.students.map(el => (
-          <li key={el.id}>{el.firstName}</li>
+        {this.props.students.map(student => (
+          <Student student={student}/>
         ))}
       </ul>
     );
@@ -31,4 +32,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { loadStudents }
-)(Students);
+)(StudentList);

@@ -1,14 +1,9 @@
 import React from "react";
-import List from "./List";
 import Form from "./Form";
-import Students from "./Students";
+import StudentList from "./StudentList";
 
 const App = () => (
     <>
-  {/* <div>
-    <h2>Articles</h2>
-      <List />
-  </div> */}
   <h2 className="jumbotron">Learning Analytics</h2>
   <div className="p-5">
   <div>
@@ -17,7 +12,7 @@ const App = () => (
   </div>
   <div className="mt-3">
       <h2>Students</h2>
-      <Students />
+      <StudentList />
     </div>
   </div>
   </>

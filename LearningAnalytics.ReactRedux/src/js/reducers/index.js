@@ -1,8 +1,6 @@
 import { ADD_STUDENT, LOAD_STUDENTS } from "../constants/action-types";
 
 const initialState = {
-    // articles: [],
-    // remoteArticles: [],
     students: []
   };
   
