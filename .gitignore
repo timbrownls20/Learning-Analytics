@@ -45,3 +45,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+
+#custom
+bin
+obj
+*.suo
+*.csproj.user
+DesignTimeBuild
