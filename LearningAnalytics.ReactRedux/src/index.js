@@ -7,9 +7,9 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import store from "./js/store/index";
-import App from "./js/components/App";
+import Cohort from "./js/components/Cohort";
 import Layout from "./js/components/Layout";
-import Page2 from "./js/components/Page2";
+import Home from "./js/components/Home";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 render(
@@ -17,8 +17,8 @@ render(
     <Router>
       {/* <Route exact path="/" component={App} />
       <Route exact path="/Page2/:filter?" component={Page2} /> */}
-      <RouteWrapper path="/" component={App} layout={Layout} exact />
-      <RouteWrapper path="/Page2/:filter?" component={Page2} layout={Layout} exact />
+      <RouteWrapper path="/" component={Home} layout={Layout} exact />
+      <RouteWrapper path="/Cohort/:filter?" component={Cohort} layout={Layout} exact />
     </Router>
   </Provider>,
   document.getElementById("root")

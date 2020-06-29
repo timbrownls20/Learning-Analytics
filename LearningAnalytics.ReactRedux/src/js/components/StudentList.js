@@ -16,7 +16,7 @@ export class StudentList extends Component {
     return (
       <div className="d-flex flex-column ">
         {this.props.students.map(student => (
-          <Student student={student}/>
+          <Student key={student.id} student={student}/>
         ))}
       </div>
     );

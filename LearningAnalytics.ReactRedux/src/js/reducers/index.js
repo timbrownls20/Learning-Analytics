@@ -14,7 +14,8 @@ function rootReducer(state = initialState, action) {
 
     if (action.type === LOAD_STUDENTS) {
       return Object.assign({}, state, {
-        students: state.students.concat(action.payload)
+        //students: state.students.concat(action.payload)
+        students: action.payload
       });
     }
 
