@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadStudents } from "../actions/index";
-import { Student } from "./Student";
+import Student from "./Student";
 
 export class StudentList extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     this.props.loadStudents();
@@ -14,11 +14,11 @@ export class StudentList extends Component {
 
   render() {
     return (
-      <ul>
+      <div className="d-flex flex-column ">
         {this.props.students.map(student => (
           <Student student={student}/>
         ))}
-      </ul>
+      </div>
     );
   }
 }

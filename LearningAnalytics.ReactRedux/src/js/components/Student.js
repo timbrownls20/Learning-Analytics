@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { loadStudents } from "../actions/index";
+import { deleteStudent } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
     return {
-      //addStudent: student => dispatch(addStudent(student))
+      deleteStudent: student => dispatch(deleteStudent(student))
     };
   }
 
-export class Student extends Component {
+class Student extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
+  handleClick(event) {
+    
+    this.props.deleteStudent(this.props.student);
+    //this.setState({ [event.target.id]: event.target.value });
+  }
 
   
 //   componentDidMount() {
@@ -21,7 +27,11 @@ export class Student extends Component {
 
   render() {
     return (
-        <li key={this.props.student.id}>{this.props.student.firstName}</li>
+        <div className="d-flex flex-row p-1" style={{width:'200px'}} key={this.props.student.id}>
+            <div>{this.props.student.firstName}</div>
+            <span class="badge badge-secondary ml-3 ml-auto" style={{cursor:'pointer'}} onClick={this.handleClick}>remove</span>
+            {/* <div className="ml-3 ml-auto">X</div> */}
+        </div>
     );
   }
 }
