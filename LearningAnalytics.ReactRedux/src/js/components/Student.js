@@ -27,10 +27,9 @@ class Student extends Component {
 
   render() {
     return (
-        <div className="d-flex flex-row p-1" style={{width:'200px'}}>
+        <div className="d-flex flex-row p-1 student">
             <div>{this.props.student.firstName}</div>
-            <span className="badge badge-secondary ml-3 ml-auto" style={{cursor:'pointer'}} onClick={this.handleClick}>remove</span>
-            {/* <div className="ml-3 ml-auto">X</div> */}
+            <span className="badge badge-secondary ml-3 ml-auto" onClick={this.handleClick}>remove</span>
         </div>
     );
   }

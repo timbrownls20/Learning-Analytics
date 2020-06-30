@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Form from "./Form";
+import StudentForm from "./StudentForm";
 import StudentList from "./StudentList";
 //import { deleteStudent } from "../actions/index";
 
@@ -28,16 +28,16 @@ class Cohort extends Component {
 //   }
 
   render() {
-    return (<>
-    <div>
-      <h2>Add a new student</h2>
-      <Form />
-    </div>
-    <div className="mt-3">
+    return (<div className="row">
+    <div className="col-6">
         <h2>Students</h2>
         <StudentList />
       </div>
-    </>
+    <div className="col-6">
+    <h2>Add a new student</h2>
+    <StudentForm />
+    </div>
+  </div>
     );
   }
 }

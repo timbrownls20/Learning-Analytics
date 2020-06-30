@@ -48,9 +48,9 @@ class ConnectedForm extends Component {
   }
 }
 
-const Form = connect(
+const StudentForm = connect(
   null,
   mapDispatchToProps
 )(ConnectedForm);
 
-export default Form;
+export default StudentForm;
