@@ -10,17 +10,23 @@ function mapDispatchToProps(dispatch) {
     };
   }
 
+  function mapStateToProps(state) {
+    return {
+      activeStudent: state.studentManagement.activeStudent //.slice(0, 10)
+    };
+  }
+
 class Cohort extends Component {
   constructor(props) {
     super(props);
-    //this.handleClick = this.handleClick.bind(this);
+    //this.handleOver = this.handleOver.bind(this);
   }
 
-//   handleClick(event) {
+  // handleOver(event) {
     
-//     this.props.deleteStudent(this.props.student);
-//     //this.setState({ [event.target.id]: event.target.value });
-//   }
+  //   //this.props.deleteStudent(this.props.student);
+  //   //this.setState({ [event.target.id]: event.target.value });
+  // }
 
   
 //   componentDidMount() {
@@ -30,25 +36,21 @@ class Cohort extends Component {
   render() {
     return (<div className="row">
     <div className="col-6">
-        <h2>Students</h2>
+        <h2>Cohort</h2>
         <StudentList />
       </div>
     <div className="col-6">
-    <h2>Add a new student</h2>
-    <StudentForm />
+    <h2>Student Details</h2>
+    <StudentForm student={this.props.activeStudent} />
     </div>
   </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     students: state.students //.slice(0, 10)
-//   };
-// }
+
 
 export default connect(
-  null, //mapStateToProps,
+  mapStateToProps, //mapStateToProps,
   mapDispatchToProps
 )(Cohort);

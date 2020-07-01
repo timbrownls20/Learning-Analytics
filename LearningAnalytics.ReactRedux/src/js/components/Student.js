@@ -1,23 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteStudent } from "../actions/index";
+import { deleteStudent, selectStudent } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
     return {
-      deleteStudent: student => dispatch(deleteStudent(student))
+      deleteStudent: student => dispatch(deleteStudent(student)),
+      selectStudent: student => dispatch(selectStudent(student))
     };
   }
 
 class Student extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
-  handleClick(event) {
-    
+  handleDelete(event) {
     this.props.deleteStudent(this.props.student);
-    //this.setState({ [event.target.id]: event.target.value });
+  }
+
+  handleSelect(event) {
+    console.log('selecting student 2')
+    this.props.selectStudent(this.props.student);
   }
 
   
@@ -27,9 +32,9 @@ class Student extends Component {
 
   render() {
     return (
-        <div className="d-flex flex-row p-1 student">
+        <div className="d-flex flex-row p-1 student" onClick={this.handleSelect}>
             <div>{this.props.student.firstName}</div>
-            <span className="badge badge-secondary ml-3 ml-auto" onClick={this.handleClick}>remove</span>
+            <span className="badge badge-secondary ml-3 ml-auto" onClick={this.handleDelete}>remove</span>
         </div>
     );
   }

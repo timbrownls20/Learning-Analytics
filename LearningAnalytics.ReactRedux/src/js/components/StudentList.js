@@ -5,9 +5,9 @@ import Student from "./Student";
 import { CSSTransitionGroup } from 'react-transition-group' 
 
 export class StudentList extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     this.props.loadStudents();
@@ -19,11 +19,11 @@ export class StudentList extends Component {
         <CSSTransitionGroup
           transitionName="student"
           transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          transitionLeaveTimeout={300}> 
         {this.props.students.map(student => (
           <Student key={student.id} student={student}/>
         ))}
-        </CSSTransitionGroup>
+        </CSSTransitionGroup> 
       </div>
     );
   }
@@ -31,7 +31,7 @@ export class StudentList extends Component {
 
 function mapStateToProps(state) {
   return {
-    students: state.students //.slice(0, 10)
+    students: state.studentManagement.students
   };
 }
 

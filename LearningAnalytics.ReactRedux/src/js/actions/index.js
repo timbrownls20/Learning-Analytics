@@ -1,5 +1,5 @@
 
-import { ADD_STUDENT, LOAD_STUDENTS, DELETE_STUDENT } from "../constants/action-types";
+import { ADD_STUDENT, LOAD_STUDENTS, DELETE_STUDENT, SELECT_STUDENT } from "../constants/action-types";
 import { ROOT_URL } from "../constants/application-config";
 
 
@@ -49,3 +49,16 @@ export function loadStudents() {
       });
   };
 }
+
+export function selectStudent(payload) {
+  return { type: SELECT_STUDENT, payload };
+}
+
+// export function selectStudent(payload) {
+
+//   return function(dispatch) {
+
+//     return dispatch({ type: SELECT_STUDENT, payload });
+//   }
+// }
+
