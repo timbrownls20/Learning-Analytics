@@ -18,9 +18,13 @@ function mapDispatchToProps(dispatch) {
 class ConnectedForm extends Component {
   constructor(props) {
     super(props);
+
+    console.log("constructor");
+
     this.state = {
       id: 0,
-      firstName: "" 
+      firstName: "",
+      surname: "" 
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,37 +34,43 @@ class ConnectedForm extends Component {
     this.setState({ [event.target.id]: event.target.value });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { firstName } = this.state;
-    this.props.addStudent({ firstName, cohortId:1 });
-    this.setState({ firstName: "" });
-  }
-  render() {
+  componentWillReceiveProps(nextProps) {
 
-    console.log('render student form');
-
-    if(this.props.student && this.props.student.id !== this.state.id){
+    if(nextProps.student && nextProps.student.id !== this.state.id){
       this.setState({
-        id: this.props.student.id, 
-        firstName: this.props.student.firstName 
+        id: nextProps.student.id, 
+        firstName: nextProps.student.firstName,
+        surname: nextProps.student.surname || ""
       });
     }
-    
-    const { id, firstName } = this.state;
+
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { firstName, surname } = this.state;
+    this.props.addStudent({ firstName, surname, cohortId:1 });
+    this.setState({ firstName: "", surname: "" });
+  }
+  render() {
+    const { id, firstName, surname } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
-          {/* <input type="hidden"
-            id="id"
-            value={id}            
-          /> */}
           <input
             type="text"
             id="firstName"
             className="form-control"
             value={firstName}
+            onChange={this.handleChange}
+          />
+          <label htmlFor="surname">Surname</label>
+          <input
+            type="text"
+            id="surname"
+            className="form-control"
+            value={surname}
             onChange={this.handleChange}
           />
         </div>

@@ -19,19 +19,7 @@ function mapDispatchToProps(dispatch) {
 class Cohort extends Component {
   constructor(props) {
     super(props);
-    //this.handleOver = this.handleOver.bind(this);
   }
-
-  // handleOver(event) {
-    
-  //   //this.props.deleteStudent(this.props.student);
-  //   //this.setState({ [event.target.id]: event.target.value });
-  // }
-
-  
-//   componentDidMount() {
-//     this.props.loadStudents();
-//   }
 
   render() {
     return (<div className="row">

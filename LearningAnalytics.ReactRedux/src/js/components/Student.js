@@ -21,7 +21,6 @@ class Student extends Component {
   }
 
   handleSelect(event) {
-    console.log('selecting student 2')
     this.props.selectStudent(this.props.student);
   }
 
@@ -33,7 +32,7 @@ class Student extends Component {
   render() {
     return (
         <div className="d-flex flex-row p-1 student" onClick={this.handleSelect}>
-            <div>{this.props.student.firstName}</div>
+            <div>{this.props.student.firstName} {this.props.student.surname}</div>
             <span className="badge badge-secondary ml-3 ml-auto" onClick={this.handleDelete}>remove</span>
         </div>
     );
