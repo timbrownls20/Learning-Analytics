@@ -1,4 +1,4 @@
-import { ADD_STUDENT, LOAD_STUDENTS, DELETE_STUDENT, SELECT_STUDENT } from "../constants/action-types";
+import { ADD_STUDENT, UPDATE_STUDENT, LOAD_STUDENTS, DELETE_STUDENT, SELECT_STUDENT } from "../constants/action-types";
 
 const initialState = {
     studentManagement: {
@@ -9,16 +9,33 @@ const initialState = {
 };
   
 function rootReducer(state = initialState, action) {
-  if (action.type === ADD_STUDENT) {
+    if (action.type === ADD_STUDENT) {
 
       return Object.assign({}, state, {
         studentManagement :{
-          students: state.studentManagement.students.concat(action.payload)
+          students: Object.assign({}, state.studentManagement.students.concat(action.payload))
+        }
+      });
+    }
+
+    if (action.type === UPDATE_STUDENT) {
+
+      var updatedStudents = state.studentManagement.students.map(item => {
+        if(item.id == action.payload.id){
+          item = action.payload;
+        }
+        return item;
+      });
+
+      return Object.assign({}, state, {
+        studentManagement :{
+          students: updatedStudents
         }
       });
     }
 
     if (action.type === LOAD_STUDENTS) {
+      
       return Object.assign({}, state, {
         studentManagement :{
           students: action.payload

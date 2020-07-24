@@ -24,11 +24,6 @@ class Student extends Component {
     this.props.selectStudent(this.props.student);
   }
 
-  
-//   componentDidMount() {
-//     this.props.loadStudents();
-//   }
-
   render() {
     return (
         <div className="d-flex flex-row p-1 student" onClick={this.handleSelect}>

@@ -1,5 +1,5 @@
 
-import { ADD_STUDENT, LOAD_STUDENTS, DELETE_STUDENT, SELECT_STUDENT } from "../constants/action-types";
+import { ADD_STUDENT, UPDATE_STUDENT, LOAD_STUDENTS, DELETE_STUDENT, SELECT_STUDENT } from "../constants/action-types";
 import { ROOT_URL } from "../constants/application-config";
 
 
@@ -19,6 +19,27 @@ export function addStudent(payload) {
       .then(json => {
         dispatch({ type: ADD_STUDENT, payload: json });
       });
+  };
+}
+
+export function updateStudent(payload) {
+
+  return function(dispatch) {
+
+    return fetch(`${ROOT_URL}/student/${payload.id}`,{
+      method: 'PUT',
+      headers: { 
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+     },
+     body: JSON.stringify(payload)
+    }).then(response => {
+      dispatch({ type: UPDATE_STUDENT, payload: payload });
+    })
+      // .then(response => response.json())
+      // .then(json => {
+      //   dispatch({ type: UPDATE_STUDENT, payload: payload });
+      // });
   };
 }
 

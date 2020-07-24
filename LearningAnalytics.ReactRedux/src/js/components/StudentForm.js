@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addStudent } from "../actions/index";
+import { addStudent, updateStudent } from "../actions/index";
 
 function mapStateToProps(state) {
   return {
@@ -11,15 +11,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addStudent: student => dispatch(addStudent(student))
+    addStudent: student => dispatch(addStudent(student)),
+    updateStudent: student => dispatch(updateStudent(student))
   };
 }
 
 class ConnectedForm extends Component {
   constructor(props) {
     super(props);
-
-    console.log("constructor");
 
     this.state = {
       id: 0,
@@ -48,9 +47,16 @@ class ConnectedForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { firstName, surname } = this.state;
-    this.props.addStudent({ firstName, surname, cohortId:1 });
-    this.setState({ firstName: "", surname: "" });
+    const { id, firstName, surname } = this.state;
+
+    if(id === 0){
+      this.props.addStudent({ id, firstName, surname, cohortId:1 });
+    }
+    else{
+      this.props.updateStudent({ id, firstName, surname, cohortId:1 });
+    }
+    
+    this.setState({ id: 0, firstName: "", surname: "" });
   }
   render() {
     const { id, firstName, surname } = this.state;
