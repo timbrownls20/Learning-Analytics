@@ -11,3 +11,6 @@ export const SELECT_STUDENT = "SELECT_STUDENT";
 
 export const UNSELECT_STUDENT = "UNSELECT_STUDENT";
 
+export const LOAD_COHORTS = "LOAD_COHORTS";
+
+export const SELECT_COHORT = "SELECT_COHORT";

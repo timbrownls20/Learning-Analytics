@@ -2,43 +2,62 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import StudentForm from "./StudentForm";
 import StudentList from "./StudentList";
-//import { deleteStudent } from "../actions/index";
+import { selectCohort } from "../actions/index";
 
-function mapDispatchToProps(dispatch) {
-    return {
-      //deleteStudent: student => dispatch(deleteStudent(student))
-    };
-  }
 
-  function mapStateToProps(state) {
-    return {
-      activeStudent: state.studentManagement.activeStudent //.slice(0, 10)
-    };
+function mapStateToProps(state) {
+  return {
+    activeStudent: state.studentManagement.activeStudent,
+    activeCohort: state.cohortManagement.activeCohort,
+  };
+}
+
+function mapDispatchToProps(dispatch){
+
+  return{
+    selectCohort: cohort => dispatch(selectCohort(cohort))
   }
+}
 
 class Cohort extends Component {
   constructor(props) {
     super(props);
+    this.props.selectCohort({id:this.props.match.params.id})
+  }
+
+  // componentDidMount(){
+  //   this.props.selectCohort({id:this.props.match.params.id})
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    
+    if(nextProps.match.params.id !== this.props.match.params.id)
+    {
+        this.props.selectCohort({id:nextProps.match.params.id});
+    }
   }
 
   render() {
-    return (<div className="row">
+    return (
+    <>
+    <h2>Cohort {this.props.activeCohort ? this.props.activeCohort.displayName : ""}</h2>
+    
+    
+    <div className="row">
     <div className="col-6">
-        <h2>Cohort</h2>
+        
         <StudentList />
       </div>
     <div className="col-6">
-    <h2>Student Details</h2>
     <StudentForm student={this.props.activeStudent} />
     </div>
   </div>
+  </>
     );
   }
 }
 
-
-
 export default connect(
-  mapStateToProps, //mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps 
 )(Cohort);

@@ -1,51 +1,97 @@
-import React from "react";
-import { NavLink } from 'react-router-dom'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { NavLink } from 'react-router-dom';
+import { loadCohorts } from "../actions/index";
 
-const Layout = ({children}) => (
-    <>
-    
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <a className="navbar-brand" href="#">Learning Analytics</a>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
+function mapDispatchToProps(dispatch) {
+  return {
+    loadCohorts: () => dispatch(loadCohorts())
+  };
+}
 
-  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav mr-auto">
-      {/* <li className="nav-item active">
-        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-      </li> */}
+function mapStateToProps(state) {
+  return {
+    cohorts: state.cohortManagement.cohorts
+  };
+}
 
-      <NavLink exact to='/' className="nav-link">Home</NavLink>
-      <NavLink exact to='/Cohort' className="nav-link">Cohort</NavLink>
-      {/* <li className="nav-item">
-        <a className="nav-link" href="#">Link</a>
-      </li> */}
-      {/* <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cohorts
+
+class Layout extends Component {
+  constructor(props) {
+    super(props);
+    this.props.loadCohorts();
+  }
+  
+  render() {
+    return (
+      <>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="navbar-brand">Learning Analytics</div>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+  
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav mr-auto">
+        <NavLink exact to='/' className="nav-link">Home</NavLink>
+        {/* <NavLink exact to='/Cohort' className="nav-link">Cohort</NavLink> */}
+        <li className="nav-item dropdown">  
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Cohorts
+          </a>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          {this.props.cohorts.map(cohort => (
+            <NavLink key={cohort.id} exact to={`/Cohort/${cohort.id}`} className="dropdown-item">{cohort.displayName}</NavLink>
+          ))}
+          </div>
+        </li>
+
+      {/* <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
         </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" href="#">Action</a>
-          <a className="dropdown-item" href="#">Another action</a>
-          <div className="dropdown-divider"></div>
-          <a className="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li> */}
-      {/* <li className="nav-item">
-        <a className="nav-link disabled" href="#">Disabled</a>
-      </li> */}
-    </ul>
-    {/* <form className="form-inline my-2 my-lg-0">
-      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> */}
-  </div>
-</nav>
-<div className="p-5">
-{children}
-</div>
-  </>
-);
 
-export default Layout;
+
+      </ul>
+    </div>
+  </nav>
+  <div className="p-5">
+  {this.props.children}
+  </div>
+    </>
+    );
+  }
+}
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Layout);
+
+// const Layout = ({children}) => (
+//     <>
+    
+//     <nav className="navbar navbar-expand-lg navbar-light bg-light">
+//   <a className="navbar-brand" href="#">Learning Analytics</a>
+//   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+//     <span className="navbar-toggler-icon"></span>
+//   </button>
+
+//   <div className="collapse navbar-collapse" id="navbarSupportedContent">
+//     <ul className="navbar-nav mr-auto">
+//       <NavLink exact to='/' className="nav-link">Home</NavLink>
+//       <NavLink exact to='/Cohort' className="nav-link">Cohort</NavLink>
+//     </ul>
+//   </div>
+// </nav>
+// <div className="p-5">
+// {children}
+// </div>
+//   </>
+// );

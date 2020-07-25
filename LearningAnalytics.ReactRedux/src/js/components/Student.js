@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteStudent, selectStudent } from "../actions/index";
+import { selectStudent } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
     return {
-      deleteStudent: student => dispatch(deleteStudent(student)),
       selectStudent: student => dispatch(selectStudent(student))
     };
   }
+function mapStateToProps(state){
+  return {
+    activeStudent: state.studentManagement.activeStudent
+  }
+}
 
 class Student extends Component {
   constructor(props) {
     super(props);
-    this.handleDelete = this.handleDelete.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleDelete(event) {
-    this.props.deleteStudent(this.props.student);
   }
 
   handleSelect(event) {
@@ -26,21 +25,18 @@ class Student extends Component {
 
   render() {
     return (
-        <div className="d-flex flex-row p-1 student" onClick={this.handleSelect}>
+        <div className={"d-flex flex-row p-1 student" + (this.isSelected() ? " selected" : "")} onClick={this.handleSelect}>
             <div>{this.props.student.firstName} {this.props.student.surname}</div>
-            <span className="badge badge-secondary ml-3 ml-auto" onClick={this.handleDelete}>remove</span>
         </div>
     );
   }
+
+  isSelected() {
+    return (this.props.activeStudent && this.props.activeStudent.id === this.props.student.id);
+  }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     students: state.students //.slice(0, 10)
-//   };
-// }
-
 export default connect(
-  null, //mapStateToProps,
+  mapStateToProps, 
   mapDispatchToProps
 )(Student);

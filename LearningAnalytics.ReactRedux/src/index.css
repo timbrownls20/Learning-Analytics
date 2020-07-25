@@ -15,9 +15,9 @@ code {
 
 .student:hover
 {
-  background-color: #17a2b8;
-  color:white;
   cursor: pointer;
+  /* border-top:1px solid silver; */
+  border-bottom:1px solid silver;
 }
 
 .student-enter {
@@ -36,4 +36,12 @@ code {
 .student-leave.student-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+.hidden{
+  display:none;
+}
+
+.selected {
+  background-color: silver;
 }

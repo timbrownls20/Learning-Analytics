@@ -27,15 +27,17 @@ namespace LearningAnalytics.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            var test = _context.Students
-                    //.Include(x => x.Cohort)
-                    .FirstOrDefault();
-
-            var jsonTest = JsonConvert.SerializeObject(test);
-
             return await _context.Students
                     //.Include(x => x.Cohort)
                     .ToListAsync();
+        }
+
+        // GET: api/Student
+        [HttpGet("cohort/{cohortId}")]
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentCohort(int cohortId)
+        {
+            return await _context.Students
+                .Where(x => x.CohortId == cohortId).ToListAsync();
         }
 
         // GET: api/Student/5

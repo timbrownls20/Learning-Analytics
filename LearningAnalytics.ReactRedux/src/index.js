@@ -16,10 +16,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 render(
   <Provider store={store}>
     <Router>
-      {/* <Route exact path="/" component={App} />
-      <Route exact path="/Page2/:filter?" component={Page2} /> */}
       <RouteWrapper path="/" component={Home} layout={Layout} exact />
-      <RouteWrapper path="/Cohort/:filter?" component={Cohort} layout={Layout} exact />
+      <RouteWrapper path="/Cohort/:id?" component={Cohort} layout={Layout} exact />
     </Router>
   </Provider>,
   document.getElementById("root")

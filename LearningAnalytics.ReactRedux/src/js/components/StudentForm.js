@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addStudent, updateStudent } from "../actions/index";
-
-function mapStateToProps(state) {
-  return {
-    //student: state.studentManagement.activeStudent 
-  };
-}
-
+import { addStudent, updateStudent, deleteStudent } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
     addStudent: student => dispatch(addStudent(student)),
-    updateStudent: student => dispatch(updateStudent(student))
+    updateStudent: student => dispatch(updateStudent(student)),
+    deleteStudent: student => dispatch(deleteStudent(student))
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    cohortId: state.cohortManagement.activeCohort ? state.cohortManagement.activeCohort.id : 0 
   };
 }
 
@@ -27,10 +27,31 @@ class ConnectedForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.isNew = this.isNew.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
+  }
+
+  handleDelete(event) {
+    const { id, firstName, surname } = this.state;
+    this.props.deleteStudent({ id, firstName, surname, cohortId:1 });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { id, firstName, surname } = this.state;
+
+    if(id === 0){
+      this.props.addStudent({ id, firstName, surname, cohortId: this.props.cohortId });
+    }
+    else{
+      this.props.updateStudent({ id, firstName, surname, cohortId:this.props.cohortId });
+    }
+    
+    this.setState({ id: 0, firstName: "", surname: "" });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -42,22 +63,22 @@ class ConnectedForm extends Component {
         surname: nextProps.student.surname || ""
       });
     }
-
   }
+  // static getDerivedStateFromProps (nextProps, state) {
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { id, firstName, surname } = this.state;
+  //   if(nextProps.student && nextProps.student.id !== state.id){
+  //     return {
+  //       id: nextProps.student.id || 0, 
+  //       firstName: nextProps.student.firstName || "",
+  //       surname: nextProps.student.surname || ""
+  //     };
+  //   }
+  //   else{
+  //     return state;
+  //   }
 
-    if(id === 0){
-      this.props.addStudent({ id, firstName, surname, cohortId:1 });
-    }
-    else{
-      this.props.updateStudent({ id, firstName, surname, cohortId:1 });
-    }
-    
-    this.setState({ id: 0, firstName: "", surname: "" });
-  }
+  // }
+
   render() {
     const { id, firstName, surname } = this.state;
     return (
@@ -80,9 +101,14 @@ class ConnectedForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">SAVE</button>
+        <button type="submit" className="btn btn-primary">{this.isNew() ? "Create": "Update"}</button>
+        <button type="button" className={"btn btn-primary ml-2" + (this.isNew() ? " hidden" : "")} onClick={this.handleDelete}>Delete</button>
       </form>
     );
+  }
+
+  isNew(){
+    return this.state.id === 0;
   }
 }
 
