@@ -37,8 +37,8 @@ class ConnectedForm extends Component {
 
     if(nextProps.student && nextProps.student.id !== this.state.id){
       this.setState({
-        id: nextProps.student.id, 
-        firstName: nextProps.student.firstName,
+        id: nextProps.student.id || 0, 
+        firstName: nextProps.student.firstName || "",
         surname: nextProps.student.surname || ""
       });
     }

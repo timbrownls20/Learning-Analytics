@@ -9,3 +9,5 @@ export const DELETE_STUDENT = "DELETE_STUDENT";
 
 export const SELECT_STUDENT = "SELECT_STUDENT";
 
+export const UNSELECT_STUDENT = "UNSELECT_STUDENT";
+
