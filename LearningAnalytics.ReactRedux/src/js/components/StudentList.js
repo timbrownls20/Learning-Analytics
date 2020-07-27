@@ -27,14 +27,14 @@ export class StudentList extends Component {
   render() {
     return (
         <div className="d-flex flex-column">
-        <CSSTransitionGroup
+        {/* <CSSTransitionGroup
           transitionName="student"
           transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          transitionLeaveTimeout={300}> */}
         {this.props.students.map(student => (
           <Student key={student.id} student={student}/>
         ))}
-        </CSSTransitionGroup>
+        {/* </CSSTransitionGroup> */}
         <div className="d-flex flex-row pt-3">
           <button className="btn btn-outline-primary" onClick={this.props.unSelectStudent}>Add</button>
         </div>
