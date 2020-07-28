@@ -2,17 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectStudent } from "../actions/index";
 
-function mapDispatchToProps(dispatch) {
-    return {
-      selectStudent: student => dispatch(selectStudent(student))
-    };
-  }
-function mapStateToProps(state){
-  return {
-    activeStudent: state.studentManagement.activeStudent
-  }
-}
-
 class Student extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +23,17 @@ class Student extends Component {
   isSelected() {
     return (this.props.activeStudent && this.props.activeStudent.id === this.props.student.id);
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    selectStudent: student => dispatch(selectStudent(student))
+  };
+}
+function mapStateToProps(state){
+return {
+  activeStudent: state.studentManagement.activeStudent
+}
 }
 
 export default connect(

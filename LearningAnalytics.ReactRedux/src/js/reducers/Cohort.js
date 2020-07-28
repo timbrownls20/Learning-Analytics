@@ -1,8 +1,7 @@
 import { LOAD_COHORTS, SELECT_COHORT } from "../constants/action-types";
-//import initialState from './InitialState';
 
 const initialState = {
-    activeCohort: null,
+    activeCohort: {id:0},
     cohorts: []
 };
 
@@ -18,7 +17,6 @@ function cohortReducer(state = initialState, action) {
 
     if (action.type === SELECT_COHORT) {
       return Object.assign({}, state, {
-          //...state.cohortManagement,
           activeCohort: action.payload
       });
     }

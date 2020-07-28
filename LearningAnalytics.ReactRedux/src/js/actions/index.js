@@ -86,9 +86,6 @@ export function loadCohorts() {
 }
 
 export function selectCohort(payload) {
-  //return { type: SELECT_COHORT, payload };
-
-  console.log("payload");
 
   return function(dispatch) {
 
@@ -98,7 +95,6 @@ export function selectCohort(payload) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
      }
-     //body: JSON.stringify(payload)
     })
       .then(response => response.json())
       .then(json => {

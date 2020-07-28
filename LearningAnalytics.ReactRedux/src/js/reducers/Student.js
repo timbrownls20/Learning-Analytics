@@ -1,7 +1,7 @@
 import { ADD_STUDENT, UPDATE_STUDENT, LOAD_STUDENTS, DELETE_STUDENT, SELECT_STUDENT, UNSELECT_STUDENT } from "../constants/action-types";
 
 const initialState = {
-      activeStudent: null,
+      activeStudent: {id: 0},
       students: []
 };
 

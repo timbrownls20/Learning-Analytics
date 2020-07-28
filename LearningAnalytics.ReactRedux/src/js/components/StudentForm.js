@@ -2,20 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addStudent, updateStudent, deleteStudent } from "../actions/index";
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addStudent: student => dispatch(addStudent(student)),
-    updateStudent: student => dispatch(updateStudent(student)),
-    deleteStudent: student => dispatch(deleteStudent(student))
-  };
-}
-
-function mapStateToProps(state) {
-  return {
-    cohortId: state.cohortManagement.activeCohort ? state.cohortManagement.activeCohort.id : 0 
-  };
-}
-
 class ConnectedForm extends Component {
   constructor(props) {
     super(props);
@@ -50,37 +36,24 @@ class ConnectedForm extends Component {
     else{
       this.props.updateStudent({ id, firstName, surname, cohortId:this.props.cohortId });
     }
-    
-    this.setState({ id: 0, firstName: "", surname: "" });
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps (props, state) {
 
-    if(nextProps.student && nextProps.student.id !== this.state.id){
-      this.setState({
-        id: nextProps.student.id || 0, 
-        firstName: nextProps.student.firstName || "",
-        surname: nextProps.student.surname || ""
-      });
+    if(props.student && props.student.id !== state.id){
+      return {
+        id: props.student.id || 0, 
+        firstName: props.student.firstName || "",
+        surname: props.student.surname || ""
+      };
+    }
+    else{
+      return null;
     }
   }
-  // static getDerivedStateFromProps (nextProps, state) {
-
-  //   if(nextProps.student && nextProps.student.id !== state.id){
-  //     return {
-  //       id: nextProps.student.id || 0, 
-  //       firstName: nextProps.student.firstName || "",
-  //       surname: nextProps.student.surname || ""
-  //     };
-  //   }
-  //   else{
-  //     return state;
-  //   }
-
-  // }
 
   render() {
-    const { id, firstName, surname } = this.state;
+    const { firstName, surname } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -110,6 +83,20 @@ class ConnectedForm extends Component {
   isNew(){
     return this.state.id === 0;
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addStudent: student => dispatch(addStudent(student)),
+    updateStudent: student => dispatch(updateStudent(student)),
+    deleteStudent: student => dispatch(deleteStudent(student))
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    cohortId: state.cohortManagement.activeCohort ? state.cohortManagement.activeCohort.id : 0 
+  };
 }
 
 const StudentForm = connect(
