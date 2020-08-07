@@ -5,7 +5,6 @@ const initialState = {
     cohorts: []
 };
 
-
 function cohortReducer(state = initialState, action) {
     
     if (action.type === LOAD_COHORTS) {

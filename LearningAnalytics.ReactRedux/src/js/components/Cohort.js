@@ -22,8 +22,6 @@ class Cohort extends Component {
     return (
     <>
     <h2>Cohort {this.props.activeCohort ? this.props.activeCohort.displayName : ""}</h2>
-    
-    
     <div className="row">
     <div className="col-6">
         <StudentList />

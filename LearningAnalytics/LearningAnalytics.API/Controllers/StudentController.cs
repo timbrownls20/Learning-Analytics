@@ -23,6 +23,12 @@ namespace LearningAnalytics.API.Controllers
             _context = context;
         }
 
+        [HttpGet("available")]
+        public ActionResult<string> Available()
+        {
+            return "API is available";
+        }
+
         // GET: api/Student
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
@@ -97,12 +103,6 @@ namespace LearningAnalytics.API.Controllers
 
             return CreatedAtAction("GetStudent", new { id = student.Id }, student);
         }
-
-        //[HttpPost]
-        //public async Task<ActionResult<string>> Test(string test)
-        //{
-        //     return CreatedAtAction("GetStudent", "Success");
-        //}
 
         // DELETE: api/Student/5
         [HttpDelete("{id}")]

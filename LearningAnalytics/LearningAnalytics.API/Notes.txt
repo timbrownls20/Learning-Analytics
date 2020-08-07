@@ -1,3 +1,18 @@
 ﻿Enable-Migrations
 Add-Migration InitialCreate (or whatever name that you wish.)
 Update-Database
+
+
+#DOCKER
+cd C:\development\Learning-Analytics\LearningAnalytics\LearningAnalytics.API
+
+docker-compose up -d
+
+docker build . -t learninganalyticsapi:dev 
+docker build . -f "LearningAnalytics.API\DockerFile" --force-rm -t learninganalyticsapi:dev 
+docker run --name test -it learninganalyticsapi:dev 
+
+docker exec learninganalyticsapi_app_1 ipconfig
+docker exec -it learninganalyticsapi_app_1 cmd
+
+dotnet run --urls=http://localhost:80/

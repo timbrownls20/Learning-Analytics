@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+  db:
+    image: dockersamples/tidb:nanoserver-sac2016
+    ports:
+      - "49301:4000"
+
+  app:
+    image: learninganalyticsapi:dev
+    build:
+      context: .
+      dockerfile: LearningAnalytics.API\Dockerfile
+    ports:
+      - "49501:80"
+    environment:
+      - "Data:Provider=MySQL"
+      - "Data:ConnectionString=Server=db;Port=4000;Database=LearningAnalytics;User=root;SslMode=None"      
+    depends_on:
+      - db
+
+networks:
+  default:
+    external:
+      name: nat
