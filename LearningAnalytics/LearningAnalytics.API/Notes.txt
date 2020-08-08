@@ -7,7 +7,7 @@ Update-Database
 cd C:\development\Learning-Analytics\LearningAnalytics
 
 
-docker build . -f "LearningAnalytics.API\DockerFile" --force-rm -t learninganalyticsapi:dev 
+docker build . -f "LearningAnalytics.API\DockerFile" --force-rm -t learninganalyticsapi:dev --no-cache
 
 docker-compose up -d
 
@@ -19,4 +19,8 @@ docker exec learninganalyticsapi_app_1 ipconfig
 docker run --name test -it learninganalyticsapi:dev 
 
 dotnet run --urls=http://localhost:80/
-docker exec learninganalytics_app_1 dotnet ef database update
+docker exec learninganalytics_app_1 dotnet ef database update # keep in for blog
+
+docker rm  learninganalytics_db_1 --force 
+
+cd c:\migration

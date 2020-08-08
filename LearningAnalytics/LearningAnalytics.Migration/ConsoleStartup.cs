@@ -17,7 +17,7 @@ namespace LearningAnalytics.Migration
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            Console.WriteLine("TB Test 1");
+            //.. for test
             Console.WriteLine(Configuration.GetConnectionString("LearningAnalyticsAPIContext"));
         }
 

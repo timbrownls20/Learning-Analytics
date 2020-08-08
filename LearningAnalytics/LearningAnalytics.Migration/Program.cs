@@ -12,7 +12,6 @@ namespace LearningAnalytics.Migration
         {
             Console.WriteLine("Applying migrations");
             var webHost = new WebHostBuilder()
-                //.UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<ConsoleStartup>()
                 .Build();

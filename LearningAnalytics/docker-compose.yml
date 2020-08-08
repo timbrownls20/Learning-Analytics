@@ -14,7 +14,7 @@ services:
     ports:
       - "49501:80"
     environment:
-      - "ConnectionStrings:LearningAnalyticsAPIContext=Server=db;Port=4000;Database=LearningAnalytics;User=root;SslMode=None;ConnectionReset=false"     
+      - "ConnectionStrings:LearningAnalyticsAPIContext=Server=db;Port=4000;Database=LearningAnalytics;User=root;SslMode=None;ConnectionReset=false;connect timeout=3600"     
     depends_on:
       - db
 

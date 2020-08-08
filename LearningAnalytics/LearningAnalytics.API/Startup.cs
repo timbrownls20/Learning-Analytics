@@ -28,7 +28,10 @@ namespace LearningAnalytics.API
 
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("LearningAnalyticsAPIContext"));
+                options.UseMySql(Configuration.GetConnectionString("LearningAnalyticsAPIContext"), builder =>
+                {
+                    builder.EnableRetryOnFailure();
+                });
 
             });
 
