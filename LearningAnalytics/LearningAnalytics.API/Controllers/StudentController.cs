@@ -16,9 +16,9 @@ namespace LearningAnalytics.API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly LearningAnalyticsAPIContext _context;
+        private readonly DatabaseContext _context;
 
-        public StudentController(LearningAnalyticsAPIContext context)
+        public StudentController(DatabaseContext context)
         {
             _context = context;
         }

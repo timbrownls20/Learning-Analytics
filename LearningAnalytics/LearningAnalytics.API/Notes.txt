@@ -4,15 +4,19 @@ Update-Database
 
 
 #DOCKER
-cd C:\development\Learning-Analytics\LearningAnalytics\LearningAnalytics.API
+cd C:\development\Learning-Analytics\LearningAnalytics
+
+
+docker build . -f "LearningAnalytics.API\DockerFile" --force-rm -t learninganalyticsapi:dev 
 
 docker-compose up -d
 
-docker build . -t learninganalyticsapi:dev 
-docker build . -f "LearningAnalytics.API\DockerFile" --force-rm -t learninganalyticsapi:dev 
-docker run --name test -it learninganalyticsapi:dev 
+docker exec -it learninganalytics_app_1 cmd
+
+dotnet LearningAnalytics.API.dll --urls=http://localhost:80/
 
 docker exec learninganalyticsapi_app_1 ipconfig
-docker exec -it learninganalyticsapi_app_1 cmd
+docker run --name test -it learninganalyticsapi:dev 
 
 dotnet run --urls=http://localhost:80/
+docker exec learninganalytics_app_1 dotnet ef database update

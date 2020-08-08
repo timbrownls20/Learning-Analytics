@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LearningAnalytics.API.Migrations
 {
-    [DbContext(typeof(LearningAnalyticsAPIContext))]
+    [DbContext(typeof(DatabaseContext))]
     partial class LearningAnalyticsAPIContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

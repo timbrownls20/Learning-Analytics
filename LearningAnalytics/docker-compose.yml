@@ -14,8 +14,7 @@ services:
     ports:
       - "49501:80"
     environment:
-      - "Data:Provider=MySQL"
-      - "Data:ConnectionString=Server=db;Port=4000;Database=LearningAnalytics;User=root;SslMode=None"      
+      - "ConnectionStrings:LearningAnalyticsAPIContext=Server=db;Port=4000;Database=LearningAnalytics;User=root;SslMode=None;ConnectionReset=false"     
     depends_on:
       - db
 

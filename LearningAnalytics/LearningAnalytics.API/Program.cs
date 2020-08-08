@@ -31,7 +31,7 @@ namespace LearningAnalytics.API
 
                 try
                 {
-                    var context = services.GetRequiredService<LearningAnalyticsAPIContext>();
+                    var context = services.GetRequiredService<DatabaseContext>();
                     context.Database.EnsureCreated();
                 }
                 catch (Exception ex)

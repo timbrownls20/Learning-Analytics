@@ -12,9 +12,9 @@ namespace LearningAnalytics.API.Controllers
     [ApiController]
     public class CohortController : ControllerBase
     {
-        private readonly LearningAnalyticsAPIContext _context;
+        private readonly DatabaseContext _context;
 
-        public CohortController(LearningAnalyticsAPIContext context)
+        public CohortController(DatabaseContext context)
         {
             _context = context;
         }

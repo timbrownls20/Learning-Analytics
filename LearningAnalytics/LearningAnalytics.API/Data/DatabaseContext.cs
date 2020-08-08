@@ -8,9 +8,9 @@ using LearningAnalytics.API.Model;
 
 namespace LearningAnalytics.API.Data
 {
-    public class LearningAnalyticsAPIContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public LearningAnalyticsAPIContext (DbContextOptions<LearningAnalyticsAPIContext> options)
+        public DatabaseContext (DbContextOptions<DatabaseContext> options)
             : base(options)
         {
         }
@@ -22,6 +22,8 @@ namespace LearningAnalytics.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Database.EnsureCreated();
+            
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.RemovePluralizingTableNameConvention();
@@ -48,6 +50,11 @@ namespace LearningAnalytics.API.Data
                 .HasKey(e => e.Id);
 
             modelBuilder.Seed();
+        }
+
+        public void Migrate(string connectionString)
+        {
+
         }
     }
 }

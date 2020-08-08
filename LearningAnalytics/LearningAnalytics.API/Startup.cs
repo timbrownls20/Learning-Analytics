@@ -26,9 +26,11 @@ namespace LearningAnalytics.API
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             ); 
 
-            services.AddDbContext<LearningAnalyticsAPIContext>(options =>
-                    options.UseMySql(Configuration.GetConnectionString("LearningAnalyticsAPIContext"))
-                    );
+            services.AddDbContext<DatabaseContext>(options =>
+            {
+                options.UseMySql(Configuration.GetConnectionString("LearningAnalyticsAPIContext"));
+
+            });
 
             services.AddCors(options =>
             {
@@ -44,6 +46,13 @@ namespace LearningAnalytics.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //..leave in
+            //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetRequiredService<LearningAnalyticsAPIContext>();
+            //    context.Database.Migrate();
+            //}
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
